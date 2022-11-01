@@ -18,7 +18,9 @@ class MyStepper extends StatefulWidget {
       this.frontImage,
       this.ingredientImage,
       this.nutrientImage,
-      this.category});
+      this.category,
+      this.productCategory,
+      this.productSubcategory});
 
   final store;
   final postalCode;
@@ -29,6 +31,9 @@ class MyStepper extends StatefulWidget {
   final frontImage;
   final ingredientImage;
   final nutrientImage;
+
+  final productCategory;
+  final productSubcategory;
 
   @override
   State<MyStepper> createState() => _MyStepperState();
@@ -41,17 +46,18 @@ class _MyStepperState extends State<MyStepper> {
   TextEditingController storeController = TextEditingController();
   TextEditingController postalCodeController = TextEditingController();
   TextEditingController cityController = TextEditingController();
+
   String provinceController = "";
   String categoryController = "";
-
-  TextEditingController productCategoryController = TextEditingController();
-  TextEditingController productSubcategoryController = TextEditingController();
 
   String frontImage = "";
   String nutrientImage = "";
   String ingredientImage = "";
 
   String storeCategory = "";
+
+  String productCategoryController = "";
+  String productSubcategoryController = "";
 
   @override
   void initState() {
@@ -108,7 +114,7 @@ class _MyStepperState extends State<MyStepper> {
       });
     }
 
-    if (widget.frontImage != null) {
+    if (widget.nutrientImage != null) {
       setState(() {
         nutrientImage = widget.nutrientImage;
       });
@@ -117,6 +123,18 @@ class _MyStepperState extends State<MyStepper> {
     if (widget.ingredientImage != null) {
       setState(() {
         ingredientImage = widget.ingredientImage;
+      });
+    }
+
+    if (widget.productCategory != null) {
+      setState(() {
+        productCategoryController = widget.productCategory;
+      });
+    }
+
+    if (widget.productSubcategory != null) {
+      setState(() {
+        productSubcategoryController = widget.productSubcategory;
       });
     }
   }
@@ -162,6 +180,18 @@ class _MyStepperState extends State<MyStepper> {
   void pickProvince(province) {
     setState(() {
       provinceController = province;
+    });
+  }
+
+  void pickProductCategory(category) {
+    setState(() {
+      productCategoryController = category;
+    });
+  }
+
+  void pickProductSubcategory(category) {
+    setState(() {
+      productSubcategoryController = category;
     });
   }
 
@@ -272,9 +302,10 @@ class _MyStepperState extends State<MyStepper> {
         Step(
           isActive: currentStep >= 1,
           content: CategoryForm(
-            productCategory: productCategoryController,
-            productSubcategory: productSubcategoryController,
-          ),
+              productCategory: productCategoryController,
+              productSubcategory: productSubcategoryController,
+              pickProductCategory: pickProductCategory,
+              pickProductSubcategory: pickProductSubcategory),
           title: const Text(''),
         ),
         Step(
@@ -318,8 +349,8 @@ class _MyStepperState extends State<MyStepper> {
             nutrientImage: nutrientImage,
             ingredientImage: ingredientImage,
             location: storeController.text,
-            category: productCategoryController.text,
-            subcategory: productSubcategoryController.text,
+            category: productCategoryController,
+            subcategory: productSubcategoryController,
           ),
           title: const Text(''),
         )

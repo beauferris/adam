@@ -5,9 +5,19 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class CategoryForm extends StatelessWidget {
   const CategoryForm(
-      {super.key, this.productCategory, this.productSubcategory});
+      {super.key,
+      this.productCategory,
+      this.productSubcategory,
+      required this.pickProductCategory,
+      required this.pickProductSubcategory});
   final productCategory;
   final productSubcategory;
+
+  final Function pickProductCategory;
+  final Function pickProductSubcategory;
+
+  final categories = const ["Dry Goods", "Wet Goods", "Candy Goods"];
+  final subcategories = const ["Cereal", "Rice", "Coffee"];
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +34,14 @@ class CategoryForm extends StatelessWidget {
         SizedBox(
           height: 100,
           child: CupertinoPicker(
+              scrollController: FixedExtentScrollController(
+                  initialItem: categories.indexOf(productCategory)),
               itemExtent: 50,
-              onSelectedItemChanged: (index) {},
-              children: const [
-                Center(child: Text("Dry Goods")),
-                Center(child: Text("Wet Goods")),
-                Center(child: Text("Candy Goods")),
-              ]),
+              onSelectedItemChanged: (index) {
+                pickProductCategory(categories[index]);
+              },
+              children:
+                  categories.map((item) => Center(child: Text(item))).toList()),
         ),
         const Align(
           alignment: Alignment.bottomLeft,
@@ -43,27 +54,17 @@ class CategoryForm extends StatelessWidget {
         SizedBox(
           height: 100,
           child: CupertinoPicker(
-              itemExtent: 50,
-              onSelectedItemChanged: (index) {},
-              children: const [
-                Center(child: Text("Cereal")),
-                Center(child: Text("Rice")),
-                Center(child: Text("Coffee"))
-              ]),
-        ),
-        // itemCategory(),
-        // itemSubcategory()
+            scrollController: FixedExtentScrollController(
+                initialItem: subcategories.indexOf(productSubcategory)),
+            itemExtent: 50,
+            onSelectedItemChanged: (index) {
+              pickProductSubcategory(subcategories[index]);
+            },
+            children:
+                subcategories.map((item) => Center(child: Text(item))).toList(),
+          ),
+        )
       ],
     );
   }
-
-  Widget itemCategory() => TextFormField(
-        controller: productCategory,
-        decoration: const InputDecoration(labelText: 'Select Product Category'),
-      );
-  Widget itemSubcategory() => TextFormField(
-        controller: productSubcategory,
-        decoration:
-            const InputDecoration(labelText: 'Select Product Subcategory'),
-      );
 }

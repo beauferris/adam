@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
         "category": "Drug Store",
       },
       "product": {
-        "category": "Dry Goods",
+        "category": "Wet Goods",
         "subcategory": "Cereal",
         "date": "March 21th 2022",
         "group": "Safeway-March 21th 2022"
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
       },
       "product": {
         "category": "Dry Goods",
-        "subcategory": "Cereal",
+        "subcategory": "Rice",
         "date": "March 22th 2022",
         "group": "Safeway-March 22th 2022"
       },
@@ -113,6 +113,8 @@ class _HomeState extends State<Home> {
                       frontImage: item['images']!['frontImage'],
                       nutrientImage: item['images']!['nutrientImage'],
                       ingredientImage: item['images']!['ingredientImage'],
+                      productCategory: item['product']!['category'],
+                      productSubcategory: item['product']!['subcategory'],
                     ),
                   ),
                 );
