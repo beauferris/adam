@@ -55,34 +55,40 @@ class _SelectStoreState extends State<SelectStore> {
   var value;
   @override
   void initState() {
-    value =
-        widget.category != null ? storeCategories.indexOf(widget.category) : 1;
+    if (widget.category != "") {
+      value = storeCategories.indexOf(widget.category);
+    } else {
+      value = 0;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.bottomLeft,
-          child: Text(
-            'Enter New Location',
-            style: TextStyle(fontSize: 20),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Column(
+        children: [
+          const Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              'Enter New Location',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
-        ),
-        buildStore(),
-        buildPostalCode(),
-        buildCity(),
-        buildProvince(),
-        const Align(
-          alignment: Alignment.bottomLeft,
-          child: Text(
-            'Store Category',
-            style: TextStyle(fontSize: 15),
+          buildStore(),
+          buildPostalCode(),
+          buildCity(),
+          buildProvince(),
+          const Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              'Store Category',
+              style: TextStyle(fontSize: 15),
+            ),
           ),
-        ),
-        buildStoreCategory(),
-      ],
+          buildStoreCategory(),
+        ],
+      ),
     );
   }
 

@@ -20,7 +20,9 @@ class MyStepper extends StatefulWidget {
       this.nutrientImage,
       this.category,
       this.productCategory,
-      this.productSubcategory});
+      this.productSubcategory,
+      this.packageSurvey,
+      this.packageColour});
 
   final store;
   final postalCode;
@@ -34,6 +36,9 @@ class MyStepper extends StatefulWidget {
 
   final productCategory;
   final productSubcategory;
+
+  final packageSurvey;
+  final packageColour;
 
   @override
   State<MyStepper> createState() => _MyStepperState();
@@ -58,6 +63,9 @@ class _MyStepperState extends State<MyStepper> {
 
   String productCategoryController = "";
   String productSubcategoryController = "";
+
+  String packageSurvey = "";
+  String packageColour = "";
 
   @override
   void initState() {
@@ -137,6 +145,18 @@ class _MyStepperState extends State<MyStepper> {
         productSubcategoryController = widget.productSubcategory;
       });
     }
+
+    if (widget.packageSurvey != null) {
+      setState(() {
+        packageSurvey = widget.packageSurvey;
+      });
+    }
+
+    if (widget.packageColour != null) {
+      setState(() {
+        packageColour = widget.packageColour;
+      });
+    }
   }
 
   Future pickImage(src, myImage) async {
@@ -195,6 +215,18 @@ class _MyStepperState extends State<MyStepper> {
     });
   }
 
+  void pickPackageSurvey(category) {
+    setState(() {
+      packageSurvey = category;
+    });
+  }
+
+  void pickPackageColour(category) {
+    setState(() {
+      packageColour = category;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -226,6 +258,10 @@ class _MyStepperState extends State<MyStepper> {
                     "city": cityController.text,
                     "province": provinceController,
                     "category": categoryController,
+                  },
+                  "survey": {
+                    "packageSurvey": packageSurvey,
+                    "packageColour": packageColour
                   },
                   "product": {
                     "category": productCategoryController,
@@ -260,11 +296,13 @@ class _MyStepperState extends State<MyStepper> {
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(18)))),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                      ),
                       onPressed: disabled ? null : details.onStepContinue,
                       child: const Text("Next"),
                     ),
@@ -337,8 +375,11 @@ class _MyStepperState extends State<MyStepper> {
         ),
         Step(
           isActive: currentStep >= 5,
-          content: const TagForm(
-            chipName: 'fuck',
+          content: TagForm(
+            packageSurvey: packageSurvey,
+            packageColour: packageColour,
+            pickPackageSurvey: pickPackageSurvey,
+            pickPackageColour: pickPackageColour,
           ),
           title: const Text(''),
         ),
