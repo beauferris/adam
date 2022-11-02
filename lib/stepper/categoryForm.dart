@@ -30,7 +30,7 @@ class CategoryForm extends StatelessWidget {
             heightFactor: 2,
             child: Text(
               'Select Category',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
             ),
           ),
           SizedBox(
@@ -51,7 +51,7 @@ class CategoryForm extends StatelessWidget {
             heightFactor: 2,
             child: Text(
               'Product Subcategory',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
             ),
           ),
           SizedBox(

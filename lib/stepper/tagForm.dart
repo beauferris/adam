@@ -46,19 +46,21 @@ class _TagFormState extends State<TagForm> {
 
   @override
   void initState() {
-    if (widget.packageSurvey != "") {
-      value = survey.indexOf(widget.packageSurvey);
-    } else {
-      value = 0;
-      widget.pickPackageSurvey(survey[0]);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.packageSurvey != "") {
+        value = survey.indexOf(widget.packageSurvey);
+      } else {
+        value = 0;
+        widget.pickPackageSurvey(survey[0]);
+      }
 
-    if (widget.packageColour != "") {
-      colourValue = colours.indexOf(widget.packageColour);
-    } else {
-      colourValue = 0;
-      widget.pickPackageColour(colours[0]);
-    }
+      if (widget.packageColour != "") {
+        colourValue = colours.indexOf(widget.packageColour);
+      } else {
+        colourValue = 0;
+        widget.pickPackageColour(colours[0]);
+      }
+    });
   }
 
   @override
@@ -67,10 +69,19 @@ class _TagFormState extends State<TagForm> {
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
-          const Text(
-              'What is the main reason that you think this packaging  is marketed towards kids?'),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 5),
+            child: Text(
+              'What is the main reason that you think this packaging  is marketed towards kids?',
+              style: TextStyle(fontWeight: FontWeight.w900),
+            ),
+          ),
           myChip(),
-          const Text('What Colour is the Package?'),
+          const Padding(padding: EdgeInsets.only(bottom: 10)),
+          const Text(
+            'What Colour is the Package?',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
           colourChip()
         ],
       ),
@@ -82,13 +93,12 @@ class _TagFormState extends State<TagForm> {
       runSpacing: 0,
       children: survey
           .map((item) => Padding(
-                padding: const EdgeInsets.only(right: 2),
+                padding: const EdgeInsets.only(right: 9),
                 child: ChoiceChip(
                   label: Text(
                     item,
                     style: const TextStyle(
-                      fontSize: 11,
-                    ),
+                        fontSize: 11, fontWeight: FontWeight.w600),
                   ),
                   selected: (value == survey.indexOf(item)),
                   onSelected: (bool selected) {
@@ -103,11 +113,12 @@ class _TagFormState extends State<TagForm> {
   Widget colourChip() => Wrap(
       children: colours
           .map((item) => Padding(
-                padding: const EdgeInsets.only(right: 2),
+                padding: const EdgeInsets.only(right: 10),
                 child: ChoiceChip(
                   label: Text(
                     item,
-                    style: const TextStyle(fontSize: 11),
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                   selected: (colourValue == colours.indexOf(item)),
                   onSelected: (bool selected) {

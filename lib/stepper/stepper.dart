@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myapp/stepper/categoryForm.dart';
@@ -230,7 +231,7 @@ class _MyStepperState extends State<MyStepper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('')),
+      appBar: AppBar(title: Text('Step ${currentStep + 1}')),
       body: Stepper(
           type: StepperType.horizontal,
           steps: getSteps(),

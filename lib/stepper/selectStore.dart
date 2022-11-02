@@ -16,15 +16,14 @@ class SelectStore extends StatefulWidget {
       required this.pickCategory,
       required this.pickProvince});
 
-  final Function pickCategory;
-  final Function pickProvince;
-
   final store;
   final postalCode;
   final city;
   final province;
   final category;
 
+  final Function pickCategory;
+  final Function pickProvince;
   @override
   State<SelectStore> createState() => _SelectStoreState();
 }
@@ -53,12 +52,17 @@ class _SelectStoreState extends State<SelectStore> {
     "Yukon"
   ];
   var value;
+
   @override
   void initState() {
+    super.initState();
     if (widget.category != "") {
       value = storeCategories.indexOf(widget.category);
     } else {
       value = 0;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.pickCategory(storeCategories[0]);
+      });
     }
   }
 
@@ -72,7 +76,7 @@ class _SelectStoreState extends State<SelectStore> {
             alignment: Alignment.bottomLeft,
             child: Text(
               'Enter New Location',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
           ),
           buildStore(),
@@ -83,7 +87,7 @@ class _SelectStoreState extends State<SelectStore> {
             alignment: Alignment.bottomLeft,
             child: Text(
               'Store Category',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
             ),
           ),
           buildStoreCategory(),
@@ -141,7 +145,7 @@ class _SelectStoreState extends State<SelectStore> {
             heightFactor: 2,
             child: Text(
               'Province',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
             ),
           ),
           SizedBox(
@@ -162,7 +166,7 @@ class _SelectStoreState extends State<SelectStore> {
   Widget buildStoreCategory() => Wrap(
       children: storeCategories
           .map((item) => Padding(
-                padding: const EdgeInsets.only(right: 2),
+                padding: const EdgeInsets.only(right: 9),
                 child: ChoiceChip(
                   label: Text(
                     item,

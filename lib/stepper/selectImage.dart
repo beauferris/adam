@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,7 +28,10 @@ class _SelectImageState extends State<SelectImage> {
               alignment: Alignment.bottomLeft,
               child: Text(
                 widget.imageTitle,
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
           ),

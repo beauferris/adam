@@ -30,6 +30,7 @@ class _ConfirmState extends State<Confirm> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
+      padding: EdgeInsets.only(top: 50),
       child: Column(
         children: [
           const Padding(
@@ -38,12 +39,12 @@ class _ConfirmState extends State<Confirm> {
               alignment: Alignment.bottomLeft,
               child: Text(
                 "Packaging",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
               ),
             ),
           ),
           SizedBox(
-            height: 200,
+            height: 150,
             width: 500,
             child: GridView.count(
               crossAxisCount: 3,
@@ -107,24 +108,55 @@ class _ConfirmState extends State<Confirm> {
           ),
           Column(
             children: [
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Location Taken: ${widget.location}',
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Category: ${widget.category}',
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              Align(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
                   alignment: Alignment.bottomLeft,
-                  child: Text(
-                    'Subcategory: ${widget.subcategory}',
-                  ))
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Location Taken:',
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      ),
+                      Text(
+                        ' ${widget.location}',
+                        textAlign: TextAlign.end,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Category: ',
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      ),
+                      Text('${widget.category}')
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Subcategory:',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        ),
+                        Text(
+                          ' ${widget.subcategory}',
+                        ),
+                      ],
+                    )),
+              )
             ],
           ),
         ],
